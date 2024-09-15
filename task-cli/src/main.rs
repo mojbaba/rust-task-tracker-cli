@@ -1,22 +1,17 @@
-extern crate json_macros;
-extern crate json_module;
+use std::{env::{args, Args}, string};
 
-use json_macros::{Deserialize, Serialize};
-use json_module::{Deserialize, Serialize};
+use command::get_command;
+
+mod task;
+mod command;
 
 fn main() {
-    let p = Person {
-        first_name: String::from("Mojtaba"),
-        last_name: String::from("Goodarzi"),
-    };
+    for a in args() {
+        println!("{}",a);
+    }
 
-    let json = p.serialize();
+    let strings: Vec<&str> = args().map(|s| s.as_str()).collect();
 
-    println!("{}", &json);
+    let command = get_command(strings).unwrap();
 }
 
-#[derive(Serialize, Deserialize)]
-struct Person {
-    first_name: String,
-    last_name: String,
-}
