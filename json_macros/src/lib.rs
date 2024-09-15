@@ -30,7 +30,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
     let expanded = quote! {
         impl Serialize for #name {
             fn serialize(&self) -> String {
-                let result = Vec::new();
+                let mut result = Vec::new();
                 #(#serialize_fields)*
                 format!("{{{}}}", result.join(", "))
             }

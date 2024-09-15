@@ -6,46 +6,20 @@ pub trait Deserialize: Sized {
     fn deserialize(json: &str) -> Result<Self, &'static str>;
 }
 
-impl Serialize for i32 {
-    fn serialize(&self) -> String {
-        format!("{}", self)
-    }
-}
 
 impl Serialize for String {
     fn serialize(&self) -> String {
-        format!("\"{}\"", self)
+        format!("\"{}\"",self)
     }
 }
 
-impl Serialize for bool{
-    fn serialize(&self) -> String {
-        format!("{}", self)
-    }
-}
 
-impl Deserialize for String{
+impl Deserialize for String {
     fn deserialize(json: &str) -> Result<Self, &'static str> {
-        if json.starts_with('"') && json.ends_with('"'){
-            Ok(json[1..json.len()-1].to_string())
-        }else{
+        if json.starts_with('"') && json.ends_with('"') {
+            Ok(json[1..json.len() - 1].to_string()) // strip quotes
+        } else {
             Err("Invalid string")
-        }
-    }
-}
-
-impl Deserialize for i32{
-    fn deserialize(json: &str) -> Result<Self, &'static str> {
-        json.parse().map_err(|_| "Invalid integer")
-    }
-}
-
-impl Deserialize for bool {
-    fn deserialize(json: &str) -> Result<Self, &'static str> {
-        match json {
-            "true" => Ok(true),
-            "false" => Ok(false),
-            _ => Err("Invalid bool")
         }
     }
 }
