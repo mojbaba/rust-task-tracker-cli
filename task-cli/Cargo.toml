@@ -1,9 +1,0 @@
-[package]
-name = "task-cli"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-chrono = "0.4.38"
-json_macros = { path = "../json_macros" } # Path to your procedural macro crate
-json_module = { path = "../json_module" } # Path to your json module crate
