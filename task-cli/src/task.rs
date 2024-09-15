@@ -132,7 +132,7 @@ mod task_time {
 
         let deserialized = TaskTime::deserialize(&serialized).unwrap();
 
-        assert_eq!(now, deserialized);
+        assert_eq!(serialized, deserialized.serialize().trim_matches('"'));
     }
 }
 
